@@ -1,0 +1,382 @@
+---
+title: "W4-5 Data Frame Exercise"
+author: "jerylann burke"
+date: "February 4, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+weather <- data.frame(
+  outlook = c("sunny", "sunny", "overcast"),
+  temperature = c(85, 80, 83),
+  humidity = c(85, 90, 86),
+  windy = c(FALSE, TRUE, FALSE),
+  play = c("no", "no", "yes")
+)
+
+weather
+```
+
+```{r}
+library(datasets)
+```
+
+```{r}
+iris
+```
+
+```{r}
+help("iris")
+```
+
+```{r}
+class(iris)
+```
+
+```{r}
+iris$Species
+```
+
+```{r}
+## write the code to retrieve the column Petal.Length in the iris dataset
+iris$Petal.Length
+```
+
+```{r}
+class(iris$Species)
+```
+
+```{r}
+## write the code to find the type of column Sepal.Length in iris
+
+class(iris$Sepal.Length)
+```
+
+```{r}
+## Apply subscripts to the name iris and retrieve the following subvectors from iris:
+# The first 50 rows (instances)
+
+iris[1:50, ]
+```
+
+```{r}
+## Apply subscripts to the name iris and retrieve the following subvectors from iris:
+
+# The first 2 columns (attributes)
+
+iris[, 1:2]
+```
+
+```{r}
+## Apply subscripts to the name iris and retrieve the following subvectors from iris:
+
+# The columns Sepal.Length and Petal.Length
+
+iris[, c("Sepal.Length", "Petal.Length")]
+```
+
+```{r}
+library(tidyverse)
+
+## Apply subscripts to the name iris and retrieve the following subvectors from iris:
+
+# The columns Sepal.Length and Petal.Length
+## done with pipe operator
+iris %>%
+  select(Sepal.Length, Petal.Length)
+```
+
+
+```{r}
+## Apply subscripts to the name iris and retrieve the following subvectors from iris:
+
+# All of the columns excluding the last column Species
+
+iris[, 1:4]
+```
+
+```{r}
+## Apply subscripts to the name iris and retrieve the following subvectors from iris:
+
+# All of the columns excluding the last column Species
+## done wiht pipe operator
+
+iris %>%
+  select(Sepal.Length, Sepal.Width, Petal.Length, Petal.Width)
+```
+
+
+```{r}
+## Apply subscripts to the name iris and retrieve the following subvectors from iris:
+
+# Select rows whose Species equals to 'setosa'
+
+iris[iris$Species == "setosa", ]
+```
+
+```{r}
+## Apply subscripts to the name iris and retrieve the following subvectors from iris:
+
+# Select rows whose Species equals to 'setosa'
+## done with pipe operator
+
+iris %>%
+  filter(Species == "setosa")
+```
+
+
+```{r}
+# apply summary function to iris
+
+summary(iris)
+
+## the six values for Sepal.Length and Petal.Length are:
+
+# Min: the minimal length, the shortest length of the sepal and petal
+
+# 1st Qu.: the lower half of the data; lengths below the median but greater than the minimum/ shortest lengths of the sepals and petals
+
+# Median: the middle value of the data (used if there is an outlier that can skew the mean)
+
+# Mean: the average length of the sepals and petals
+
+# 3rd Qu.: is the upper half of data; lengths greater than the median but less than the maximum/ longest lengths
+
+# Max: the maximum length, the longest sepal and petal.
+
+##the six values for Sepal.Width and Petal.Width are:
+
+# Min: the minimum width, the shortest width of the sepal and petal
+
+#1st Qu. is the lower half of the data; widths below the median but greater than the minimum/ shortest widths of the sepals and petals
+
+# Median: is the middle width of the sepals and petals (used if there is an outlier that can skew the mean)
+
+# Mean: average width of the sepals and petals
+
+#3rd Qu.: is the upper half of data; widths greater than the median but less than the maximum / widest widths
+
+# Max: the maximum width, the widest sepals and petals
+```
+
+```{r}
+df <- data.frame(X = -2:2, Y = 1:5)
+df
+```
+
+```{r}
+# returns a vector of Y column values where the rows of X > 0
+## since X > 0 returns a vector of Y column values where X = 1,2
+### gives only a vector
+result1 <- df$Y[df$X > 0]
+result1
+```
+
+```{r}
+# returns all rows where X > 0
+## gives both columns X and Y
+### since X > 0 returns rows where X = 1,2
+#### gives table
+result2 <- df[df$X > 0, ]
+result2
+```
+
+```{r}
+mtcars
+```
+
+```{r}
+# Print only the first five rows of mtcars
+
+mtcars[1:5, ]
+```
+
+```{r}
+# Print the last five rows of mtcars
+
+mtcars[28:32, ]
+```
+
+```{r}
+# How many rows does the data have?
+## 32 rows
+
+dim(mtcars)[1]
+```
+
+```{r}
+#Print the mpg column of the data
+
+mtcars[, "mpg"]
+## or mtcars$mpg
+```
+
+```{r}
+
+#Print the mpg column of the data
+## done with pipe operator
+
+mtcars %>%
+  select(mpg)
+```
+
+
+```{r}
+# Print the mpg column of mtcars where the corresponding cyl column is 6
+
+mtcars[ mtcars$cyl == 6, "mpg"]
+# or mtcars$mpg [ mtcars$cyl == 6]
+```
+
+```{r}
+# Print the mpg column of mtcars where the corresponding cyl column is 6
+## done with pipe operator
+mtcars %>%
+  filter(cyl == 6) %>%
+  select(mpg)
+```
+
+
+```{r}
+# Print all rows of data where cyl is 6
+
+mtcars[mtcars$cyl == 6, ]
+```
+
+```{r}
+# Print all rows of data where cyl is 6
+## done with pipe operator
+mtcars %>%
+  filter(cyl == 6)
+```
+
+
+```{r}
+# Print all the rows of data where mgp is greater than 25, but only for the mpg and cyl columns
+
+mtcars[mtcars$mpg >25, c("mpg", "cyl")]
+```
+
+
+```{r}
+
+# Print all the rows of data where mgp is greater than 25, but only for the mpg and cyl columns
+## done with pipe operator
+mtcars %>%
+  filter(mpg > 25) %>%
+  select(mpg, cyl)
+  
+```
+
+
+
+```{r}
+library(ggplot2)
+diamonds
+```
+
+```{r}
+help(diamonds)
+```
+
+```{r}
+# Print the first five rows  of diamonds
+diamonds[1:5, ]
+```
+
+```{r}
+# Find the row and column count
+dim(diamonds)
+```
+
+```{r}
+# Select rows whose cut equals to Very Good. and Find the total of rows in the returned subset
+
+diamonds[diamonds$cut == "Very Good", ]
+nrow(diamonds[diamonds$cut == "Very Good", ])
+# 12082 rows
+```
+
+```{r}
+# Select rows whose cut equals to Very Good. and Find the total of rows in the returned subset
+## done with pipe operator
+
+diamonds %>%
+  filter(cut == "Very Good")
+```
+
+
+```{r}
+# Find how many diamonds whose carat is greater than 3.0
+
+diamonds[diamonds$carat > 3.0, ]
+nrow(diamonds[diamonds$carat > 3.0, ])
+#32 rows, 32 diamonds
+```
+
+```{r}
+# Find how many diamonds whose carat is greater than 3.0
+## done with pipe operator
+
+diamonds %>%
+  filter(carat > 3.0) %>%
+  count()
+```
+
+
+```{r}
+# Return rows where color is D, but only for color and cut columns
+
+diamonds[diamonds$color == "D", c("color", "cut")]
+```
+
+```{r}
+# Return rows where color is D, but only for color and cut columns
+## done with pipe operator
+
+diamonds %>%
+  filter(color == "D") %>%
+  select(color, cut)
+```
+
+
+```{r}
+# Run the summary command with the diamonds data. Read the average price
+
+summary(diamonds)
+# mean of price is 3933; $3,933
+```
+
+
+
+
+
+
+
+
+
+
